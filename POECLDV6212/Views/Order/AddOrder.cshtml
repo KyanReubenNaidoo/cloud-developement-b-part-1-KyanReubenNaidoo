@@ -1,0 +1,52 @@
+﻿
+@model POECLDV6212.Models.Order
+
+@{
+    var customers = ViewData["Customer"] as List<POECLDV6212.Models.Customer>;
+    var products = ViewData["Product"] as List<POECLDV6212.Models.Product>;
+}
+
+<h1>AddOrder</h1>
+
+@if (customers == null || customers.Count == 0 || products == null || products.Count == 0)
+{
+    <div class="alert alert-warning">
+        No Customers or Products available. Please ensure they are added first.
+    </div>
+}
+else
+{
+    <form asp-action="AddOrder" method="post">
+        <div class="form-group">
+            <label asp-for="Customer_ID">Select Customer</label>
+            <select asp-for="Customer_ID" class="form-control"
+                    asp-items="@(new SelectList(customers, "Customer_ID", "Full_Name"))">
+                <option value="">-- Select Customer --</option>
+            </select>
+            <span asp-validation-for="Customer_ID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Product_ID">Select Product</label>
+            <select asp-for="Product_ID" class="form-control"
+                    asp-items="@(new SelectList(products, "Product_ID", "Product_Name"))">
+                <option value="">-- Select Product --</option>
+            </select>
+            <span asp-validation-for="Product_ID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="OrderDate"></label>
+            <input asp-for="OrderDate" class="form-control" type="datetime-local" />
+            <span asp-validation-for="OrderDate" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+}

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<POECLDV6212.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AddCustomer">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Full_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone_Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Full_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone_Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <form asp-action="Details" method="get" style="display:inline;">
+                        <input type="hidden" name="partitionKey" value="@item.PartitionKey" />
+                        <input type="hidden" name="rowKey" value="@item.RowKey" />
+                        <button type="submit" class="btn btn-info btn-sm">View</button>
+                    </form>
+
+                    <form asp-action="Edit" method="get" style="display:inline;">
+                        <input type="hidden" name="partitionKey" value="@item.PartitionKey" />
+                        <input type="hidden" name="rowKey" value="@item.RowKey" />
+                        <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure that you want to edit this Customer?');">Edit</button>
+                    </form>
+
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="partitionKey" value="@item.PartitionKey" />
+                        <input type="hidden" name="rowKey" value="@item.RowKey" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure that you want to delete this Customer?');">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

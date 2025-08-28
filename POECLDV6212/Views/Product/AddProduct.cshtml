@@ -1,0 +1,35 @@
+﻿@model POECLDV6212.Models.Product
+
+@{
+    ViewData["Title"] = "AddProduct";
+}
+
+<h1>AddProduct</h1>
+
+<h4>Product</h4>
+<form asp-action="AddProduct" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Product_Name"></label>
+        <input type="text" name="Product_Name" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input type="text" name="Description" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label>Upload Product Image</label>
+        <input type="file" name="file" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Quantity"></label>
+        <input type="text" name="Quantity" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input type="text" name="Price" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
